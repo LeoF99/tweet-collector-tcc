@@ -8,12 +8,12 @@ const {
   TWIT_API_SECRET_KEY,
 } = process.env;
 
-interface IQuery {
+export interface IQuery {
   query: string;
   count: number;
 }
 
-interface ITweetData {
+export interface ITweetData {
   text: string;
   query: string;
   timestamp: Date;

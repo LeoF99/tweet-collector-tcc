@@ -17,9 +17,10 @@ class QueriesCsvReader {
       })
       .on('end', () => {
         console.log('CSV file successfully processed');
-        console.log(this.queries);
       });
   }
+
+  getQueries = () => this.queries;
 }
 
-export default QueriesCsvReader;
+export default new QueriesCsvReader();

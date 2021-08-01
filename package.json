@@ -11,10 +11,12 @@
     "start": "node dist/server.js",
     "build": "yarn run clean; tsc -p .",
     "clean": "rm -rf dist",
-    "lint": "yarn eslint --fix"
+    "lint": "yarn eslint --fix",
+    "script:get-tweets": "ts-node src/scripts/getTweetsFromQueries.ts"
   },
   "dependencies": {
     "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "twit": "^2.2.11"
