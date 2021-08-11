@@ -12,7 +12,8 @@
     "build": "yarn run clean; tsc -p .",
     "clean": "rm -rf dist",
     "lint": "yarn eslint --fix",
-    "script:get-tweets": "ts-node src/scripts/getTweetsFromQueries.ts"
+    "script:get-tweets": "ts-node src/scripts/getTweetsFromQueries.ts",
+    "script:user-tweets": "ts-node src/scripts/getFromUserIds.ts"
   },
   "dependencies": {
     "csv-parser": "^3.0.0",

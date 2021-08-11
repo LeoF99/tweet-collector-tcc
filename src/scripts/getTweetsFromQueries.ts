@@ -1,7 +1,6 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable import/extensions */
-import dotenv from 'dotenv';
-import twitterGateway, { IQuery, ITweetData } from '../gateways/twitter.gateway';
+import twitterGateway, { ICollection, IQuery } from '../gateways/twitter.gateway';
 import queriesCsvReader from '../services/getQueriesFromCsv';
 import writeTweetsToCsv from '../services/writeTweetsToCsv';
 
@@ -9,7 +8,7 @@ const DEFAULT_COUNT = Number(process.env.DEFAULT_COUNT) || 1000;
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function getTweets(queries: string[]) {
-  const result: ITweetData[] = [];
+  let result: ICollection;
 
   for (let i = 0; i < queries.length; i++) {
     const query: IQuery = {
@@ -17,11 +16,9 @@ async function getTweets(queries: string[]) {
       query: queries[i],
     };
 
-    const data = await twitterGateway.getTweets(query);
-    result.push(...data);
+    result = await twitterGateway.getTweets(query);
+    writeTweetsToCsv.write(result);
   }
-
-  writeTweetsToCsv.write(result);
 }
 
 async function main() {
