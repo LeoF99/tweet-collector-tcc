@@ -10,7 +10,7 @@ class Writer {
   write = (data: ICollection) => {
     const date = new Date().toString();
     this.writer = createObjectCsvWriter({
-      path: path.join(__dirname, '..', `/output/politics/${data.query}/collection_${data.query}_${date}.csv`),
+      path: path.join(__dirname, '..', `/politics/merged/${data.query}/collection_${data.query}_${date}.csv`),
       // path: path.join(__dirname, '..', `/output/posts/09-08/posts_${data.query}_${date}.csv`),
       header: [
         { id: 'text', title: 'text' },
