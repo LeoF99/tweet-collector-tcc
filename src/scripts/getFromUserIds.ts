@@ -7,7 +7,7 @@ import writeTweetsToCsv from '../services/writeTweetsToCsv';
 const DEFAULT_COUNT = Number(process.env.DEFAULT_COUNT) || 1000;
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function getTweets(ids: string[]) {
+async function getTweets(ids: string[], names: string[] = []) {
   let result: ICollection;
 
   for (let i = 0; i < ids.length; i++) {
@@ -17,7 +17,7 @@ async function getTweets(ids: string[]) {
     };
 
     result = await twitterGateway.getTweetsByUserIds(query);
-    writeTweetsToCsv.write(result);
+    writeTweetsToCsv.write(result, names[i]);
   }
 }
 
@@ -26,7 +26,8 @@ async function main() {
   await sleep(1000);
 
   const queries: string[] = queriesCsvReader.getIds();
-  getTweets(queries);
+  const names: string[] = queriesCsvReader.getQueries();
+  getTweets(queries, names);
 }
 
 main();

@@ -23,6 +23,7 @@ export interface ITweetData {
 export interface ICollection {
   tweets: ITweetData[];
   query: string;
+  extra?: string;
 }
 
 class TwitterGateway {

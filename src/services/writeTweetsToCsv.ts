@@ -7,11 +7,18 @@ import { ICollection } from '../gateways/twitter.gateway';
 class Writer {
   private writer: CsvWriter<ObjectMap<any>> | undefined;
 
-  write = (data: ICollection) => {
+  write = (data: ICollection, label: string = '') => {
     const date = new Date().toString();
+    let pathString: string;
+
+    if (!label.length) {
+      pathString = `/politics/merged/${data.query}/collection_${data.query}_${date}.csv`;
+    } else {
+      pathString = `/politics/users_post/${label}/${label}_${data.query}_${date}.csv`;
+    }
+
     this.writer = createObjectCsvWriter({
-      path: path.join(__dirname, '..', `/politics/merged/${data.query}/collection_${data.query}_${date}.csv`),
-      // path: path.join(__dirname, '..', `/output/posts/09-08/posts_${data.query}_${date}.csv`),
+      path: path.join(__dirname, '..', pathString),
       header: [
         { id: 'text', title: 'text' },
         { id: 'query', title: 'query' },
