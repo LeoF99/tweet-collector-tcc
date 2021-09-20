@@ -6,6 +6,8 @@ dotenv.config();
 const {
   TWIT_API_KEY,
   TWIT_API_SECRET_KEY,
+  ACCESS_TOKEN,
+  ACCESS_TOKEN_SECRET,
 } = process.env;
 
 export interface IQuery {
@@ -34,7 +36,8 @@ class TwitterGateway {
       {
         consumer_key: String(TWIT_API_KEY),
         consumer_secret: String(TWIT_API_SECRET_KEY),
-        app_only_auth: true,
+        access_token: String(ACCESS_TOKEN),
+        access_token_secret: String(ACCESS_TOKEN_SECRET),
       },
     );
   }
